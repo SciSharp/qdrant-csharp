@@ -1,6 +1,6 @@
 ﻿namespace QdrantCSharp.Models;
 
-public class CollectCreationRequest
+public class CollectCreationBody
 {
     public VectorParams Vectors { get; set; }
 }

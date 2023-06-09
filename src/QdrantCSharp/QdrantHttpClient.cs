@@ -1,4 +1,4 @@
-﻿using QdrantCSharp.QdrantRestAPIs;
+﻿using QdrantCSharp.RestAPIs;
 using Refit;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -30,6 +30,9 @@ public class QdrantHttpClient : IQdrantClient
     IQdrantCollectionApi _collectionApi
         => RestService.For<IQdrantCollectionApi>(GetHttpClient());
 
+    IQdrantPointApi _pointsApi
+        => RestService.For<IQdrantPointApi>(GetHttpClient());
+
     public QdrantHttpClient(string url, string apiKey)
     {
         _url = url;
@@ -44,7 +47,7 @@ public class QdrantHttpClient : IQdrantClient
 
     public async Task<QdrantHttpResponse<bool>> CreateCollection(string collectionName, VectorParams vectorsConfig)
     {
-        var result = await _collectionApi.CreateCollection(collectionName, new CollectCreationRequest
+        var result = await _collectionApi.CreateCollection(collectionName, new CollectCreationBody
         {
             Vectors = vectorsConfig
         });
@@ -53,4 +56,10 @@ public class QdrantHttpClient : IQdrantClient
 
     public async Task<QdrantHttpResponse<bool>> DeleteCollection(string collectionName)
         => await _collectionApi.DeleteCollection(collectionName);
+
+    public async Task<QdrantHttpResponse<UpdateResult>> Upsert(string collectionName, List<PointStruct> points)
+        => await _pointsApi.Upsert(collectionName, new PointsUpsertBody
+        {
+            Points = points
+        });
 }

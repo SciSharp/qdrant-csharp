@@ -1,7 +1,7 @@
 ﻿using Refit;
 using System.Threading.Tasks;
 
-namespace QdrantCSharp.QdrantRestAPIs;
+namespace QdrantCSharp.RestAPIs;
 
 public interface IQdrantCollectionApi
 {
@@ -26,7 +26,7 @@ public interface IQdrantCollectionApi
     /// <param name="collectionName"></param>
     /// <returns></returns>
     [Put("/collections/{collection_name}")]
-    Task<QdrantHttpResponse<bool>> CreateCollection([AliasAs("collection_name")] string collectionName, [Body] CollectCreationRequest body);
+    Task<QdrantHttpResponse<bool>> CreateCollection([AliasAs("collection_name")] string collectionName, [Body] CollectCreationBody body);
 
     /// <summary>
     /// Drop collection and all associated data

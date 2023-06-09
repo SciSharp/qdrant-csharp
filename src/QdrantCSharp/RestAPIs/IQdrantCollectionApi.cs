@@ -10,7 +10,15 @@ public interface IQdrantCollectionApi
     /// </summary>
     /// <returns></returns>
     [Get("/collections")]
-    Task<QdrantHttpResponse<CollectionsResponse>> GetCollections();
+    Task<QdrantHttpResponse<CollectionList>> GetCollections();
+
+    /// <summary>
+    /// Get detailed information about specified existing collection
+    /// </summary>
+    /// <param name="collectionName"></param>
+    /// <returns></returns>
+    [Get("/collections/{collection_name}")]
+    Task<QdrantHttpResponse<CollectionInfo>> GetCollection([AliasAs("collection_name")] string collectionName);
 
     /// <summary>
     /// Create new collection with given parameters
@@ -19,4 +27,12 @@ public interface IQdrantCollectionApi
     /// <returns></returns>
     [Put("/collections/{collection_name}")]
     Task<QdrantHttpResponse<bool>> CreateCollection([AliasAs("collection_name")] string collectionName, [Body] CollectCreationRequest body);
+
+    /// <summary>
+    /// Drop collection and all associated data
+    /// </summary>
+    /// <param name="collectionName"></param>
+    /// <returns></returns>
+    [Delete("/collections/{collection_name}")]
+    Task<QdrantHttpResponse<bool>> DeleteCollection([AliasAs("collection_name")] string collectionName);
 }

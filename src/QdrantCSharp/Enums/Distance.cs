@@ -1,4 +1,4 @@
-﻿namespace QdrantCSharp.Models;
+﻿namespace QdrantCSharp.Enums;
 
 public class Distance
 {

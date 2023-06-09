@@ -1,16 +1,26 @@
-﻿namespace QdrantCSharp.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace QdrantCSharp.Models;
 
 public class VectorParams
 {
-    int _size;
-    public int Size => _size;
+    public int Size { get; set; }
 
-    string _distance;
-    public string Distance => _distance;
+    public string Distance { get; set; }
 
-    public VectorParams(int size, string distance)
+    [JsonPropertyName("on_disk")]
+    public bool OnDisk { get; set; }
+
+    [JsonPropertyName("hnsw_config")]
+    public HnswConfig HnswConfig { get; set; }
+
+    [JsonPropertyName("quantization_config")]
+    public ScalarQuantization QuantizationConfig { get; set; }
+
+    public VectorParams(int size, string distance, bool onDisk = true)
     {
-        _size = size;
-        _distance = distance;
+        Size = size;
+        Distance = distance;
+        OnDisk = onDisk;
     }
 }

@@ -36,8 +36,11 @@ public class QdrantHttpClient : IQdrantClient
         _apiKey = apiKey;
     }
 
-    public async Task<QdrantHttpResponse<CollectionsResponse>> GetCollections()
+    public async Task<QdrantHttpResponse<CollectionList>> GetCollections()
         => await _collectionApi.GetCollections();
+
+    public async Task<QdrantHttpResponse<CollectionInfo>> GetCollection(string collectionName)
+        => await _collectionApi.GetCollection(collectionName);
 
     public async Task<QdrantHttpResponse<bool>> CreateCollection(string collectionName, VectorParams vectorsConfig)
     {
@@ -47,4 +50,7 @@ public class QdrantHttpClient : IQdrantClient
         });
         return result;
     }
+
+    public async Task<QdrantHttpResponse<bool>> DeleteCollection(string collectionName)
+        => await _collectionApi.DeleteCollection(collectionName);
 }

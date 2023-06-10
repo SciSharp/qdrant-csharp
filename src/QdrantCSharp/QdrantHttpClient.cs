@@ -62,4 +62,12 @@ public class QdrantHttpClient : IQdrantClient
         {
             Points = points
         });
+
+    public async Task<QdrantHttpResponse<ScoredPoint[]>> Search(string collectionName, float[] queryVector, int limit = 10, int offset = 0)
+        => await _pointsApi.Search(collectionName, new SearchBody
+        {
+            Limit = limit,
+            Offset = offset,
+            Vector = queryVector
+        });
 }

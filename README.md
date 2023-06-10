@@ -1,6 +1,8 @@
 # Qdrant .NET Client
 This project contains a .NET client for the [Qdrant vector database](https://qdrant.tech/). This client supports HTTP in either blocking or non-blocking fashion.
 
+[![NuGet](https://img.shields.io/nuget/dt/Qdrant.Client.svg)](https://www.nuget.org/packages/Qdrant.Client) 
+
 #### How to use Qdrant client in .NET
 ```csharp
 using QdrantCSharp;
